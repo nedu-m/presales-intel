@@ -2,6 +2,56 @@
 
 AI-powered intelligence brief generation for presales meetings. Get comprehensive company research, technical analysis, and meeting preparation in seconds instead of hours.
 
+## 💡 The Problem
+
+Every presales engineer and sales professional manually researches prospects before calls:
+
+- Company website, LinkedIn, and recent news review
+- Tech stack analysis (BuiltWith, job postings)
+- Prior emails and CRM notes
+- Competitor research
+- Talking points and objection prep
+
+**Time Cost**: 1-2 hours per meeting × 5-10 meetings/week = 5-20 hours/week lost to manual research.
+
+## 🎯 The Opportunity
+
+### What Exists (And Why It's Not Enough)
+
+**Data Aggregation Tools** (not synthesis):
+- ZoomInfo, Apollo, Cognism - Contact data dumps, no analysis
+- Clearbit, BuiltWith - Tech stack lists, no context
+- Clay - Manual workflow building, requires setup
+
+**Post-Meeting Analysis** (wrong timing):
+- Gong, Chorus, Fireflies, Fathom - Transcribe after calls
+- Useful for coaching, useless for prep
+
+**Intent/Signals** (not actionable):
+- 6sense, Demandbase - "In-market" signals without guidance
+- Don't tell you what to actually say
+
+**Closest Competitors**:
+- Attention AI, Sybill - Shallow pre-call briefings (basic scraping + CRM)
+- Wingman - AE-focused, not presales-specific
+- Momentum (YC) - CRM updates, light prep features
+
+### The Gap We Fill
+
+No tools provide:
+- ✨ **Deep technical context synthesis** for presales engineers
+- ✨ **Tech stack → security gaps → talking points** (actionable insights)
+- ✨ **Competitive landscape → predicted objections** (strategic positioning)
+- ✨ **Company news → business priorities → solution fit** (contextual relevance)
+- ✨ **Persona-specific tailoring** (CISO vs IT manager vs procurement)
+
+### Why This Works
+
+- **Underserved Market**: Presales engineers are overlooked (most tools target AEs)
+- **Clear Value Prop**: 2 hours → 20 seconds = 30-60x time savings
+- **Low Technical Risk**: API orchestration, not ML invention
+- **Proven Need**: Every B2B company needs this, no one has solved it well
+
 ## 🎯 What It Does
 
 Generate comprehensive intelligence briefs for presales meetings with:
@@ -278,17 +328,32 @@ Example integrations to add:
 
 ## 🛣️ Roadmap
 
-### Planned Features
+### Current Status: MVP Validation
 
+This is a validation MVP built to test the core hypothesis: Can AI-generated briefs replace manual research for presales engineers?
+
+### Planned Enhancements
+
+**Data Sources** (High Priority):
+- [ ] Clearbit API - Company data and tech stack enrichment
+- [ ] LinkedIn Sales Navigator - Attendee research and background
+- [ ] BuiltWith API - Actual technology detection
+- [ ] CRM integrations (Salesforce, HubSpot) - Internal notes and history
+
+**Features**:
 - [ ] User authentication and teams
-- [ ] Additional data sources (Clearbit, LinkedIn, BuiltWith)
-- [ ] CRM integrations (Salesforce, HubSpot)
 - [ ] Brief templates customization
-- [ ] PDF export
+- [ ] PDF export with branding
 - [ ] Calendar integration for automatic brief scheduling
 - [ ] Email briefs before meetings
+- [ ] Collaborative notes and feedback
+
+**Technical**:
 - [ ] PostgreSQL migration for production
+- [ ] Redis caching for faster repeated lookups
+- [ ] Rate limiting and usage monitoring
 - [ ] React frontend upgrade (post-validation)
+- [ ] Comprehensive test coverage
 
 ## 🤝 Contributing
 
