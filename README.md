@@ -2,7 +2,7 @@
 
 AI-powered intelligence brief generation for presales meetings. Get comprehensive company research, technical analysis, and meeting preparation in seconds instead of hours.
 
-## 💡 The Problem
+## The Problem
 
 Every presales engineer and sales professional manually researches prospects before calls:
 
@@ -14,7 +14,7 @@ Every presales engineer and sales professional manually researches prospects bef
 
 **Time Cost**: 1-2 hours per meeting × 5-10 meetings/week = 5-20 hours/week lost to manual research.
 
-## 🎯 The Opportunity
+## The Opportunity
 
 ### What Exists (And Why It's Not Enough)
 
@@ -39,11 +39,11 @@ Every presales engineer and sales professional manually researches prospects bef
 ### The Gap We Fill
 
 No tools provide:
-- ✨ **Deep technical context synthesis** for presales engineers
-- ✨ **Tech stack → security gaps → talking points** (actionable insights)
-- ✨ **Competitive landscape → predicted objections** (strategic positioning)
-- ✨ **Company news → business priorities → solution fit** (contextual relevance)
-- ✨ **Persona-specific tailoring** (CISO vs IT manager vs procurement)
+- **Deep technical context synthesis** for presales engineers
+- **Tech stack → security gaps → talking points** (actionable insights)
+- **Competitive landscape → predicted objections** (strategic positioning)
+- **Company news → business priorities → solution fit** (contextual relevance)
+- **Persona-specific tailoring** (CISO vs IT manager vs procurement)
 
 ### Why This Works
 
@@ -52,7 +52,7 @@ No tools provide:
 - **Low Technical Risk**: API orchestration, not ML invention
 - **Proven Need**: Every B2B company needs this, no one has solved it well
 
-## 🎯 What It Does
+## What It Does
 
 Generate comprehensive intelligence briefs for presales meetings with:
 
@@ -62,16 +62,16 @@ Generate comprehensive intelligence briefs for presales meetings with:
 - **Competitive Landscape** - Current vendors, competitive positioning, and key differentiators
 - **Talking Points** - Discovery questions, objection handling, and value propositions
 
-## ✨ Features
+## Features
 
-- ⚡ **Fast Generation** - Get comprehensive briefs in 15-30 seconds
-- 🔄 **Real-Time Data** - Live company information from Google Knowledge Graph and recent news
-- 🤖 **AI-Powered** - GPT-4 synthesizes data into actionable insights
-- 📊 **Brief History** - Access and review previously generated briefs
-- 🎨 **Modern UI** - Clean, responsive interface built with DaisyUI
-- 📱 **Print & Export** - Copy to clipboard or print briefs for offline use
+- **Fast Generation** - Get comprehensive briefs in 15-30 seconds
+- **Real-Time Data** - Live company information from Google Knowledge Graph and recent news
+- **AI-Powered** - GPT-4 synthesizes data into actionable insights
+- **Brief History** - Access and review previously generated briefs
+- **Modern UI** - Clean, responsive interface built with DaisyUI
+- **Print & Export** - Copy to clipboard or print briefs for offline use
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Backend**: FastAPI (Python 3.11+)
 - **Frontend**: HTMX + Jinja2 + DaisyUI
@@ -80,7 +80,7 @@ Generate comprehensive intelligence briefs for presales meetings with:
 - **Database**: SQLite (upgradeable to PostgreSQL)
 - **Deployment**: Docker-ready
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -135,7 +135,7 @@ uvicorn app.main:app --reload
 
 Navigate to http://localhost:8000
 
-## 📖 Usage
+## Usage
 
 ### Generating a Brief
 
@@ -156,7 +156,7 @@ Navigate to http://localhost:8000
 - **Print**: Click the print button to save as PDF
 - **Copy**: Use the copy button to copy brief text to clipboard
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 presales-intel/
@@ -183,7 +183,7 @@ presales-intel/
 └── README.md
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -199,7 +199,7 @@ presales-intel/
 - **SerpAPI Free Tier**: 100 searches/month (50 briefs)
 - **OpenAI GPT-4**: Pay-per-use (~$0.10-0.15 per brief)
 
-## 🐳 Docker Deployment
+## Docker Deployment
 
 ### Build and Run
 
@@ -237,7 +237,7 @@ Run with:
 docker-compose up -d
 ```
 
-## ☁️ Cloud Deployment
+## Cloud Deployment
 
 ### Fly.io
 
@@ -261,7 +261,7 @@ The application can be deployed to any platform supporting Python/Docker:
 - DigitalOcean App Platform
 - AWS App Runner
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### Web Interface
 
@@ -277,7 +277,7 @@ When running locally, access interactive API docs:
 - **Swagger UI**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
 
-## 🧪 Development
+## Development
 
 ### Running in Development Mode
 
@@ -311,14 +311,14 @@ Example integrations to add:
 - BuiltWith (tech stack detection)
 - CRM APIs (Salesforce, HubSpot)
 
-## 📊 Performance
+## Performance
 
 - **Average Generation Time**: 20 seconds
 - **SerpAPI Calls**: 2 per brief (~3-5 seconds)
 - **GPT-4 Generation**: ~10-15 seconds
 - **Database**: SQLite (suitable for single-user MVP)
 
-## 🔒 Security Considerations
+## Security Considerations
 
 - Store API keys in environment variables (never commit to git)
 - Use `.env` file locally (already in `.gitignore`)
@@ -326,7 +326,7 @@ Example integrations to add:
 - Consider rate limiting for public deployments
 - Add authentication before multi-user deployment
 
-## 🛣️ Roadmap
+## Roadmap
 
 ### Current Status: MVP Validation
 
@@ -355,15 +355,15 @@ This is a validation MVP built to test the core hypothesis: Can AI-generated bri
 - [ ] React frontend upgrade (post-validation)
 - [ ] Comprehensive test coverage
 
-## 🤝 Contributing
+## Contributing
 
 This is currently a validation MVP. Contributions welcome after product-market fit is established.
 
-## 📝 License
+## License
 
 MIT License - see LICENSE file for details
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - OpenAI for GPT-4 API
 - SerpAPI for Google search access
@@ -371,11 +371,11 @@ MIT License - see LICENSE file for details
 - DaisyUI for beautiful components
 - HTMX for simple dynamic interactions
 
-## 📧 Support
+## Support
 
 For issues, questions, or feature requests, please open an issue in the repository.
 
 ---
 
-**Built with ❤️ for presales professionals who want to win more deals.**
+**Built for presales professionals who want to win more deals.**
 
