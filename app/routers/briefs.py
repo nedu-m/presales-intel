@@ -1,18 +1,14 @@
 from fastapi import APIRouter, Request, Form, Depends, HTTPException
-from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
-from pathlib import Path
 from datetime import datetime
 
 from app.database import get_db
 from app.models import Brief
 from app.services.intelligence import IntelligenceService
+from app.templates_config import templates
 
 router = APIRouter(prefix="/briefs", tags=["briefs"])
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 
 @router.post("/generate", response_class=HTMLResponse)

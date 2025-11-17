@@ -1,32 +1,20 @@
 from fastapi import FastAPI, Request
-from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 import os
 from pathlib import Path
-import markdown
 
 from app.routers import briefs
 from app.database import engine, Base
+from app.templates_config import templates
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Presales Intel", version="0.1.0")
 
-# Setup templates and static files
+# Setup static files
 BASE_DIR = Path(__file__).resolve().parent
-templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
-
-# Add markdown filter to Jinja2
-def markdown_filter(text):
-    """Convert markdown to HTML"""
-    if not text:
-        return ""
-    return markdown.markdown(text, extensions=['extra', 'nl2br', 'sane_lists'])
-
-templates.env.filters['markdown'] = markdown_filter
-
 app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
 
 # Include routers
