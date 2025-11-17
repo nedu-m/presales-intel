@@ -15,19 +15,10 @@ router = APIRouter(prefix="/briefs", tags=["briefs"])
 async def generate_brief(
     request: Request,
     company_name: str = Form(...),
-    meeting_date: str = Form(None),
     attendees: str = Form(None),
     db: Session = Depends(get_db)
 ):
     """Generate intelligence brief for a meeting"""
-    
-    # Parse meeting date if provided
-    parsed_date = None
-    if meeting_date:
-        try:
-            parsed_date = datetime.fromisoformat(meeting_date)
-        except ValueError:
-            pass
     
     # Initialize intelligence service
     intel_service = IntelligenceService()
@@ -36,14 +27,13 @@ async def generate_brief(
         # Generate brief sections
         brief_data = await intel_service.generate_brief(
             company_name=company_name,
-            meeting_date=parsed_date,
             attendees=attendees
         )
         
         # Save to database
         brief = Brief(
             company_name=company_name,
-            meeting_date=parsed_date,
+            meeting_date=None,
             attendees=attendees,
             company_context=brief_data["company_context"],
             attendee_analysis=brief_data.get("attendee_analysis"),

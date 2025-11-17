@@ -22,7 +22,6 @@ class IntelligenceService:
     async def generate_brief(
         self,
         company_name: str,
-        meeting_date: Optional[datetime] = None,
         attendees: Optional[str] = None
     ) -> Dict[str, str]:
         """
@@ -39,8 +38,6 @@ class IntelligenceService:
         
         # Build context for the prompt
         context = f"Company: {company_name}\n"
-        if meeting_date:
-            context += f"Meeting Date: {meeting_date.strftime('%Y-%m-%d')}\n"
         if attendees:
             context += f"Attendees: {attendees}\n"
         

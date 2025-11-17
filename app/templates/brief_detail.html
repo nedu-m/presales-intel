@@ -28,14 +28,9 @@
             </div>
 
             <!-- Meeting Info -->
-            {% if brief.meeting_date or brief.attendees %}
+            {% if brief.attendees %}
             <div class="bg-base-200 p-4 rounded-lg mb-6">
-                {% if brief.meeting_date %}
-                <p class="mb-2"><strong>Meeting Date:</strong> {{ brief.meeting_date.strftime('%B %d, %Y') }}</p>
-                {% endif %}
-                {% if brief.attendees %}
                 <p><strong>Attendees:</strong> {{ brief.attendees }}</p>
-                {% endif %}
             </div>
             {% endif %}
 

@@ -17,11 +17,6 @@
                         <p class="text-sm text-base-content/60 mt-1">
                             Generated {{ brief.created_at.strftime('%B %d, %Y at %I:%M %p') }}
                         </p>
-                        {% if brief.meeting_date %}
-                        <div class="badge badge-outline mt-2">
-                            Meeting: {{ brief.meeting_date.strftime('%B %d, %Y') }}
-                        </div>
-                        {% endif %}
                     </div>
                     <a href="/briefs/{{ brief.id }}" class="btn btn-primary btn-sm">
                         View Brief →

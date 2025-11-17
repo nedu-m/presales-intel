@@ -6,12 +6,6 @@
                 🖨️ Print
             </button>
         </div>
-        
-        {% if brief.meeting_date %}
-        <div class="badge badge-primary mb-4">
-            Meeting: {{ brief.meeting_date.strftime('%B %d, %Y') }}
-        </div>
-        {% endif %}
 
         <!-- Full Brief Content -->
         <div class="markdown-content prose max-w-none">
