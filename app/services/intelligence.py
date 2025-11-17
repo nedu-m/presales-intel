@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import Optional, Dict
 from openai import OpenAI
 from dotenv import load_dotenv
+from app.services.data_sources import DataSourceService
 
 load_dotenv()
 
@@ -16,6 +17,7 @@ class IntelligenceService:
             raise ValueError("OPENAI_API_KEY not found in environment")
         self.client = OpenAI(api_key=api_key)
         self.model = "gpt-4-turbo-preview"
+        self.data_service = DataSourceService()
     
     async def generate_brief(
         self,
@@ -31,6 +33,10 @@ class IntelligenceService:
             competitive_landscape, suggested_questions, full_brief
         """
         
+        # Fetch real-time data
+        company_info = await self.data_service.search_company_info(company_name)
+        news_data = await self.data_service.search_company_news(company_name)
+        
         # Build context for the prompt
         context = f"Company: {company_name}\n"
         if meeting_date:
@@ -38,9 +44,40 @@ class IntelligenceService:
         if attendees:
             context += f"Attendees: {attendees}\n"
         
+        # Add real-time data context
+        enrichment = "\n\n## Real-time Research Data:\n\n"
+        
+        # Add company info from knowledge graph
+        if company_info.get("knowledge_graph"):
+            kg = company_info["knowledge_graph"]
+            enrichment += "### Company Overview (from Google Knowledge Graph):\n"
+            if kg.get("description"):
+                enrichment += f"- Description: {kg['description']}\n"
+            if kg.get("type"):
+                enrichment += f"- Type: {kg['type']}\n"
+            if kg.get("founded"):
+                enrichment += f"- Founded: {kg['founded']}\n"
+            if kg.get("headquarters"):
+                enrichment += f"- Headquarters: {kg['headquarters']}\n"
+            enrichment += "\n"
+        
+        # Add recent news
+        if news_data.get("news") and len(news_data["news"]) > 0:
+            enrichment += "### Recent News:\n"
+            for news_item in news_data["news"]:
+                enrichment += f"- **{news_item['title']}**\n"
+                if news_item.get('date'):
+                    enrichment += f"  Date: {news_item['date']}\n"
+                if news_item.get('snippet'):
+                    enrichment += f"  {news_item['snippet']}\n"
+                enrichment += "\n"
+        
         prompt = f"""You are a presales intelligence analyst. Generate a comprehensive brief for an upcoming meeting.
 
 {context}
+{enrichment}
+
+Use the real-time research data provided above to inform your analysis. Be specific and cite recent developments when relevant.
 
 Generate a detailed intelligence brief with the following sections:
 
