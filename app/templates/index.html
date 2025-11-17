@@ -3,75 +3,165 @@
 {% block title %}Generate Brief - Presales Intel{% endblock %}
 
 {% block content %}
-<div class="max-w-4xl mx-auto">
+<div class="max-w-6xl mx-auto">
     <!-- Hero section -->
-    <div class="text-center mb-12">
-        <h1 class="text-5xl font-bold mb-4">Presales Intelligence Brief</h1>
-        <p class="text-xl text-base-content/70">AI-powered meeting preparation in seconds</p>
+    <div class="text-center mb-16 mt-8">
+        <div class="inline-block mb-4">
+            <div class="badge badge-lg badge-primary gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                AI-Powered Research
+            </div>
+        </div>
+        <h1 class="text-6xl font-extrabold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            Win More Deals
+        </h1>
+        <p class="text-2xl text-base-content/70 mb-4 max-w-3xl mx-auto">
+            Get comprehensive intelligence briefs for your presales meetings in seconds, not hours.
+        </p>
+        <p class="text-lg text-base-content/60 max-w-2xl mx-auto">
+            Real-time company research, competitive analysis, and talking points powered by AI.
+        </p>
     </div>
 
-    <!-- Form -->
-    <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
-            <h2 class="card-title text-2xl mb-4">Generate Meeting Brief</h2>
-            
-            <form 
-                hx-post="/briefs/generate" 
-                hx-target="#brief-result" 
-                hx-indicator="#loading"
-                class="space-y-4"
-            >
-                <!-- Company Name -->
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text font-semibold">Company Name *</span>
-                    </label>
-                    <input 
-                        type="text" 
-                        name="company_name" 
-                        placeholder="e.g., Acme Corp" 
-                        class="input input-bordered w-full" 
-                        required 
-                    />
+    <!-- Features grid -->
+    <div class="grid md:grid-cols-3 gap-6 mb-16">
+        <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
+            <div class="card-body items-center text-center">
+                <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
                 </div>
-
-                <!-- Attendees -->
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text font-semibold">Attendees</span>
-                        <span class="label-text-alt">Optional - comma separated</span>
-                    </label>
-                    <textarea 
-                        name="attendees" 
-                        placeholder="e.g., John Doe (CISO), Jane Smith (IT Director)" 
-                        class="textarea textarea-bordered h-24"
-                    ></textarea>
+                <h3 class="card-title text-lg">Real-Time Data</h3>
+                <p class="text-sm text-base-content/70">Live company info and recent news from Google</p>
+            </div>
+        </div>
+        
+        <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
+            <div class="card-body items-center text-center">
+                <div class="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
                 </div>
+                <h3 class="card-title text-lg">Comprehensive Analysis</h3>
+                <p class="text-sm text-base-content/70">Tech stack, competitive landscape, and security posture</p>
+            </div>
+        </div>
+        
+        <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
+            <div class="card-body items-center text-center">
+                <div class="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                    </svg>
+                </div>
+                <h3 class="card-title text-lg">Actionable Insights</h3>
+                <p class="text-sm text-base-content/70">Suggested questions and objection handling strategies</p>
+            </div>
+        </div>
+    </div>
 
-                <!-- Submit Button -->
-                <div class="form-control mt-6">
-                    <button type="submit" class="btn btn-primary btn-lg w-full">
-                        <span id="loading" class="loading loading-spinner loading-md htmx-indicator"></span>
-                        <span class="htmx-request:hidden">Generate Intelligence Brief</span>
-                        <span class="htmx-indicator">Generating Brief...</span>
-                    </button>
+    <!-- Form section -->
+    <div class="max-w-2xl mx-auto">
+        <div class="card bg-gradient-to-br from-base-100 to-base-200 shadow-2xl border border-base-300">
+            <div class="card-body">
+                <h2 class="card-title text-3xl mb-2 justify-center">Generate Your Brief</h2>
+                <p class="text-center text-base-content/70 mb-6">Enter a company name to get started</p>
+                
+                <form 
+                    hx-post="/briefs/generate" 
+                    hx-target="#brief-result" 
+                    hx-indicator="#loading"
+                    class="space-y-6"
+                >
+                    <!-- Company Name -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold text-lg">Company Name</span>
+                            <span class="label-text-alt text-error">* Required</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            name="company_name" 
+                            placeholder="e.g., Stripe, Datadog, Snowflake" 
+                            class="input input-bordered input-lg w-full focus:input-primary" 
+                            required 
+                        />
+                    </div>
+
+                    <!-- Attendees -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Key Attendees</span>
+                            <span class="label-text-alt">Optional</span>
+                        </label>
+                        <textarea 
+                            name="attendees" 
+                            placeholder="e.g., John Doe (CISO), Jane Smith (VP Engineering)" 
+                            class="textarea textarea-bordered h-28 focus:textarea-primary"
+                        ></textarea>
+                        <label class="label">
+                            <span class="label-text-alt">Comma-separated names and titles for personalized analysis</span>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-control mt-8">
+                        <button type="submit" class="btn btn-primary btn-lg w-full text-lg">
+                            <span id="loading" class="loading loading-spinner loading-md htmx-indicator"></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 htmx-request:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                            <span class="htmx-request:hidden">Generate Intelligence Brief</span>
+                            <span class="htmx-indicator">Generating Brief...</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Loading indicator -->
+                    <div id="loading-message" class="htmx-indicator mt-4 alert alert-info">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current flex-shrink-0 w-6 h-6 animate-spin">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                            <div>
+                                <div class="font-bold">Researching company...</div>
+                                <div class="text-xs">Fetching real-time data and generating brief (15-30 seconds)</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Quick stats -->
+        <div class="mt-8 text-center">
+            <div class="stats stats-horizontal shadow bg-base-100">
+                <div class="stat place-items-center">
+                    <div class="stat-title">Average Time</div>
+                    <div class="stat-value text-primary text-2xl">20s</div>
+                    <div class="stat-desc">vs 2 hours manual research</div>
                 </div>
                 
-                <!-- Loading indicator -->
-                <div id="loading-message" class="htmx-indicator mt-4 alert alert-info">
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current flex-shrink-0 w-6 h-6 animate-spin">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg>
-                        <span>Fetching real-time data and generating brief... This takes 15-30 seconds.</span>
-                    </div>
+                <div class="stat place-items-center">
+                    <div class="stat-title">Data Sources</div>
+                    <div class="stat-value text-secondary text-2xl">Real-time</div>
+                    <div class="stat-desc">Google News & Knowledge Graph</div>
                 </div>
-            </form>
+                
+                <div class="stat place-items-center">
+                    <div class="stat-title">AI Model</div>
+                    <div class="stat-value text-accent text-2xl">GPT-4</div>
+                    <div class="stat-desc">Latest reasoning model</div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Result area -->
-    <div id="brief-result" class="mt-8">
+    <div id="brief-result" class="mt-16">
         <!-- Brief will be inserted here via HTMX -->
     </div>
 </div>
