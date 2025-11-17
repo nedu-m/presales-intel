@@ -1,0 +1,41 @@
+<div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+        <div class="flex justify-between items-start mb-4">
+            <h2 class="card-title text-3xl">{{ brief.company_name }}</h2>
+            <button onclick="window.print()" class="btn btn-ghost btn-sm">
+                🖨️ Print
+            </button>
+        </div>
+        
+        {% if brief.meeting_date %}
+        <div class="badge badge-primary mb-4">
+            Meeting: {{ brief.meeting_date.strftime('%B %d, %Y') }}
+        </div>
+        {% endif %}
+
+        <!-- Full Brief Content -->
+        <div class="markdown-content prose max-w-none">
+            {{ brief.full_brief|safe }}
+        </div>
+
+        <!-- Actions -->
+        <div class="card-actions justify-end mt-6">
+            <button onclick="copyToClipboard()" class="btn btn-outline">
+                📋 Copy to Clipboard
+            </button>
+            <a href="/briefs/{{ brief.id }}" class="btn btn-primary">
+                View Details
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard() {
+    const text = document.querySelector('.markdown-content').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        alert('Brief copied to clipboard!');
+    });
+}
+</script>
+

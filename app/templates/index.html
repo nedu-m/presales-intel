@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Generate Brief - Presales Intel{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <!-- Hero section -->
+    <div class="text-center mb-12">
+        <h1 class="text-5xl font-bold mb-4">Presales Intelligence Brief</h1>
+        <p class="text-xl text-base-content/70">AI-powered meeting preparation in seconds</p>
+    </div>
+
+    <!-- Form -->
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title text-2xl mb-4">Generate Meeting Brief</h2>
+            
+            <form 
+                hx-post="/briefs/generate" 
+                hx-target="#brief-result" 
+                hx-indicator="#loading"
+                class="space-y-4"
+            >
+                <!-- Company Name -->
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Company Name *</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        name="company_name" 
+                        placeholder="e.g., Acme Corp" 
+                        class="input input-bordered w-full" 
+                        required 
+                    />
+                </div>
+
+                <!-- Meeting Date -->
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Meeting Date</span>
+                    </label>
+                    <input 
+                        type="date" 
+                        name="meeting_date" 
+                        class="input input-bordered w-full" 
+                    />
+                </div>
+
+                <!-- Attendees -->
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Attendees</span>
+                        <span class="label-text-alt">Optional - comma separated</span>
+                    </label>
+                    <textarea 
+                        name="attendees" 
+                        placeholder="e.g., John Doe (CISO), Jane Smith (IT Director)" 
+                        class="textarea textarea-bordered h-24"
+                    ></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-control mt-6">
+                    <button type="submit" class="btn btn-primary btn-lg w-full">
+                        <span id="loading" class="loading loading-spinner loading-md htmx-indicator"></span>
+                        Generate Intelligence Brief
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Result area -->
+    <div id="brief-result" class="mt-8">
+        <!-- Brief will be inserted here via HTMX -->
+    </div>
+</div>
+{% endblock %}
+
