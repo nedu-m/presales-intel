@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Presales Intel{% endblock %}</title>
+    <title>{% block title %}PrepCall{% endblock %}</title>
 
     <!-- DaisyUI + Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.0/dist/full.min.css" rel="stylesheet" type="text/css" />
@@ -21,7 +21,7 @@
     <!-- Navbar -->
     <div class="navbar">
         <div class="container">
-            <a href="/" class="brand">Presales Intel</a>
+            <a href="/" class="brand">PrepCall</a>
             <nav class="nav-links">
                 <a href="/" class="nav-link {% if request.url.path == '/' %}active{% endif %}">Generate</a>
                 <a href="/briefs/history"
@@ -40,7 +40,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <span>Presales Intel</span>
+            <span>PrepCall</span>
             <small>Meeting preparation clarity</small>
         </div>
     </footer>

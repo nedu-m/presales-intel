@@ -1,4 +1,4 @@
-# Presales Intel
+# PrepCall
 
 AI-powered intelligence brief generation for presales meetings. Get comprehensive company research, technical analysis, and meeting preparation in seconds instead of hours.
 
@@ -377,5 +377,7 @@ For issues, questions, or feature requests, please open an issue in the reposito
 
 ---
 
-**Built for presales professionals who want to win more deals.**
+**PrepCall - Built for presales professionals who want to win more deals.**
+
+Visit us at [prepcall.io](https://prepcall.io)
 

@@ -11,7 +11,7 @@ from app.templates_config import templates
 # Create database tables
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Presales Intel", version="0.1.0")
+app = FastAPI(title="PrepCall", version="0.1.0")
 
 # Setup static files
 BASE_DIR = Path(__file__).resolve().parent
