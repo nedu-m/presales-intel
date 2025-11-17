@@ -64,8 +64,19 @@
                 <div class="form-control mt-6">
                     <button type="submit" class="btn btn-primary btn-lg w-full">
                         <span id="loading" class="loading loading-spinner loading-md htmx-indicator"></span>
-                        Generate Intelligence Brief
+                        <span class="htmx-request:hidden">Generate Intelligence Brief</span>
+                        <span class="htmx-indicator">Generating Brief...</span>
                     </button>
+                </div>
+                
+                <!-- Loading indicator -->
+                <div id="loading-message" class="htmx-indicator mt-4 alert alert-info">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current flex-shrink-0 w-6 h-6 animate-spin">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        <span>Fetching real-time data and generating brief... This takes 15-30 seconds.</span>
+                    </div>
                 </div>
             </form>
         </div>
