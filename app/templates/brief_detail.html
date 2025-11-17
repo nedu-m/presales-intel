@@ -3,62 +3,61 @@
 {% block title %}{{ brief.company_name }} - Presales Intel{% endblock %}
 
 {% block content %}
-<div class="max-w-4xl mx-auto">
-    <!-- Back button -->
-    <div class="mb-6">
-        <a href="/briefs/history" class="btn btn-ghost btn-sm">
-            ← Back to History
-        </a>
-    </div>
-
-    <!-- Brief Card -->
-    <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
-            <!-- Header -->
-            <div class="flex justify-between items-start mb-6">
-                <div>
-                    <h1 class="text-4xl font-bold">{{ brief.company_name }}</h1>
-                    <p class="text-sm text-base-content/60 mt-2">
-                        Generated {{ brief.created_at.strftime('%B %d, %Y at %I:%M %p') }}
-                    </p>
-                </div>
-                <button onclick="window.print()" class="btn btn-outline">
-                    🖨️ Print
-                </button>
-            </div>
-
-            <!-- Meeting Info -->
-            {% if brief.attendees %}
-            <div class="bg-base-200 p-4 rounded-lg mb-6">
-                <p><strong>Attendees:</strong> {{ brief.attendees }}</p>
-            </div>
-            {% endif %}
-
-            <!-- Full Brief -->
-            <div class="markdown-content prose max-w-none">
-                {{ brief.full_brief|markdown|safe }}
-            </div>
-
-            <!-- Actions -->
-            <div class="card-actions justify-end mt-8 pt-6 border-t">
-                <button onclick="copyToClipboard()" class="btn btn-outline">
-                    📋 Copy to Clipboard
-                </button>
-                <a href="/" class="btn btn-primary">
-                    Generate New Brief
-                </a>
-            </div>
-        </div>
-    </div>
+<div class="page-actions">
+    <a href="/briefs/history" class="secondary-btn">Back to history</a>
 </div>
 
+<section class="surface-panel brief-card" id="detail-brief">
+    <div class="panel-header">
+        <div>
+            <h1 style="margin: 0; font-size: 2.4rem;">{{ brief.company_name }}</h1>
+            <p style="margin: 0.5rem 0 0; color: var(--muted); font-size: 0.95rem;">
+                Generated {{ brief.created_at.strftime('%B %d, %Y at %I:%M %p') }}
+            </p>
+        </div>
+        <div class="panel-actions" style="justify-content: flex-start;">
+            <button type="button" class="secondary-btn" onclick="window.print()">Print brief</button>
+            <button type="button" class="secondary-btn" onclick="copyDetailBrief()">Copy text</button>
+            <a href="/" class="primary-btn" style="padding: 0.85rem 1.5rem;">Generate another</a>
+        </div>
+    </div>
+
+    {% if brief.attendees %}
+    <div class="detail-meta">
+        <strong>Meeting attendees:</strong> {{ brief.attendees }}
+    </div>
+    {% endif %}
+
+    {% set sections = [
+        ("Company context", brief.company_context),
+        ("Attendee analysis", brief.attendee_analysis),
+        ("Tech & security", brief.tech_stack),
+        ("Competitive landscape", brief.competitive_landscape),
+        ("Questions & talking points", brief.suggested_questions)
+    ] %}
+    <div class="section-grid">
+        {% for label, content in sections %}
+            {% if content %}
+            <article class="section-card">
+                <small>{{ label }}</small>
+                <p>{{ content|striptags|replace('\n', ' ')|truncate(200, False, '…') }}</p>
+            </article>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="markdown-content">
+        {{ brief.full_brief|markdown|safe }}
+    </div>
+</section>
+
 <script>
-function copyToClipboard() {
-    const text = document.querySelector('.markdown-content').innerText;
-    navigator.clipboard.writeText(text).then(() => {
-        alert('Brief copied to clipboard!');
+function copyDetailBrief() {
+    const section = document.querySelector('#detail-brief .markdown-content');
+    if (!section) return;
+    navigator.clipboard.writeText(section.innerText).then(() => {
+        console.log('Brief copied to clipboard');
     });
 }
 </script>
 {% endblock %}
-

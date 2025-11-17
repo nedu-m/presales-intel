@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Request, Form, Depends, HTTPException
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from sqlalchemy.orm import Session
 from datetime import datetime
 
@@ -102,4 +102,32 @@ async def view_brief(
             "brief": brief
         }
     )
+
+
+@router.post("/{brief_id}/delete", response_class=HTMLResponse)
+async def delete_brief(
+    brief_id: int,
+    request: Request,
+    db: Session = Depends(get_db)
+):
+    """Delete a brief and refresh history listing"""
+    brief = db.query(Brief).filter(Brief.id == brief_id).first()
+
+    if not brief:
+        raise HTTPException(status_code=404, detail="Brief not found")
+
+    db.delete(brief)
+    db.commit()
+
+    briefs = db.query(Brief).order_by(Brief.created_at.desc()).limit(20).all()
+    if request.headers.get("HX-Request"):
+        return templates.TemplateResponse(
+            "components/history_list.html",
+            {
+                "request": request,
+                "briefs": briefs
+            }
+        )
+
+    return RedirectResponse(url="/briefs/history", status_code=303)
 

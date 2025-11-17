@@ -1,0 +1,32 @@
+{% if briefs %}
+<div class="list-stack">
+    {% for brief in briefs %}
+    <article class="list-card">
+        <div>
+            <h3>{{ brief.company_name }}</h3>
+            <p>{{ brief.created_at.strftime('%B %d, %Y at %I:%M %p') }}</p>
+        </div>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <a href="/briefs/{{ brief.id }}" class="secondary-btn">Open brief</a>
+            <form 
+                method="post" 
+                action="/briefs/{{ brief.id }}/delete" 
+                hx-post="/briefs/{{ brief.id }}/delete" 
+                hx-target="#history-list" 
+                hx-swap="innerHTML" 
+                hx-confirm="Delete this brief? This cannot be undone.">
+                <button type="submit" class="secondary-btn" style="border-color: var(--danger); color: var(--danger);">
+                    Delete
+                </button>
+            </form>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert-neutral">
+    <p style="margin: 0 0 0.5rem; font-weight: 600;">No briefs yet</p>
+    <p style="margin: 0;">Generate your first brief to get started. Takes about 20 seconds.</p>
+</div>
+{% endif %}
+

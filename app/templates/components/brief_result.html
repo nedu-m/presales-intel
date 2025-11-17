@@ -1,35 +1,45 @@
-<div class="card bg-base-100 shadow-xl">
-    <div class="card-body">
-        <div class="flex justify-between items-start mb-4">
-            <h2 class="card-title text-3xl">{{ brief.company_name }}</h2>
-            <button onclick="window.print()" class="btn btn-ghost btn-sm">
-                🖨️ Print
-            </button>
+<div class="surface-panel brief-card" id="brief-{{ brief.id }}">
+    <div class="panel-header">
+        <div>
+            <h2 style="margin: 0;">{{ brief.company_name }}</h2>
+            <p style="margin: 0.35rem 0 0; color: var(--muted); font-size: 0.9rem;">Brief generated successfully</p>
         </div>
+        <div class="panel-actions" style="justify-content: flex-start; gap: 0.75rem; margin-top: 0;">
+            <button type="button" class="secondary-btn" onclick="window.print()">Print</button>
+            <button type="button" class="secondary-btn" onclick="copyBrief({{ brief.id }})">Copy text</button>
+            <a href="/briefs/{{ brief.id }}" class="secondary-btn">View full detail</a>
+        </div>
+    </div>
 
-        <!-- Full Brief Content -->
-        <div class="markdown-content prose max-w-none">
-            {{ brief.full_brief|markdown|safe }}
-        </div>
+    {% set sections = [
+        ("Company context", brief.company_context),
+        ("Attendee analysis", brief.attendee_analysis),
+        ("Tech & security", brief.tech_stack),
+        ("Competitive landscape", brief.competitive_landscape),
+        ("Questions & talking points", brief.suggested_questions)
+    ] %}
+    <div class="section-grid">
+        {% for label, content in sections %}
+            {% if content %}
+            <article class="section-card">
+                <small>{{ label }}</small>
+                <p>{{ content|striptags|replace('\n', ' ')|truncate(160, False, '…') }}</p>
+            </article>
+            {% endif %}
+        {% endfor %}
+    </div>
 
-        <!-- Actions -->
-        <div class="card-actions justify-end mt-6">
-            <button onclick="copyToClipboard()" class="btn btn-outline">
-                📋 Copy to Clipboard
-            </button>
-            <a href="/briefs/{{ brief.id }}" class="btn btn-primary">
-                View Details
-            </a>
-        </div>
+    <div class="markdown-content">
+        {{ brief.full_brief|markdown|safe }}
     </div>
 </div>
 
 <script>
-function copyToClipboard() {
-    const text = document.querySelector('.markdown-content').innerText;
-    navigator.clipboard.writeText(text).then(() => {
-        alert('Brief copied to clipboard!');
+function copyBrief(id) {
+    const section = document.querySelector(`#brief-${id} .markdown-content`);
+    if (!section) return;
+    navigator.clipboard.writeText(section.innerText).then(() => {
+        console.log('Brief copied to clipboard');
     });
 }
 </script>
-

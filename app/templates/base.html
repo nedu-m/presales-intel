@@ -1,94 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Presales Intel{% endblock %}</title>
-    
+
     <!-- DaisyUI + Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.0/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- HTMX -->
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    
+
     <!-- Custom styles -->
-    <style>
-        .markdown-content {
-            line-height: 1.6;
-            color: #333;
-        }
-        .markdown-content h1 {
-            font-size: 1.875rem;
-            font-weight: 700;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-            color: #1a1a1a;
-        }
-        .markdown-content h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-top: 1.25rem;
-            margin-bottom: 0.75rem;
-            color: #1a1a1a;
-        }
-        .markdown-content h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-            color: #2a2a2a;
-        }
-        .markdown-content p {
-            margin-bottom: 1rem;
-        }
-        .markdown-content ul, .markdown-content ol {
-            margin-left: 2rem;
-            margin-bottom: 1rem;
-        }
-        .markdown-content li {
-            margin-bottom: 0.5rem;
-        }
-        .markdown-content strong {
-            font-weight: 600;
-        }
-        .markdown-content code {
-            background-color: #f4f4f4;
-            padding: 0.2rem 0.4rem;
-            border-radius: 3px;
-            font-family: 'Courier New', monospace;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
-<body class="bg-base-200 min-h-screen">
+
+<body>
     <!-- Navbar -->
-    <div class="navbar bg-base-100 shadow-lg">
-        <div class="container mx-auto">
-            <div class="flex-1">
-                <a href="/" class="btn btn-ghost text-xl">🎯 Presales Intel</a>
-            </div>
-            <div class="flex-none">
-                <ul class="menu menu-horizontal px-1">
-                    <li><a href="/">Generate</a></li>
-                    <li><a href="/briefs/history">History</a></li>
-                </ul>
-            </div>
+    <div class="navbar">
+        <div class="container">
+            <a href="/" class="brand">Presales Intel</a>
+            <nav class="nav-links">
+                <a href="/" class="nav-link {% if request.url.path == '/' %}active{% endif %}">Generate</a>
+                <a href="/briefs/history"
+                    class="nav-link {% if request.url.path.startswith('/briefs') and request.url.path != '/' %}active{% endif %}">History</a>
+            </nav>
         </div>
     </div>
 
     <!-- Main content -->
-    <main class="container mx-auto px-4 py-8">
-        {% block content %}{% endblock %}
+    <main>
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
     </main>
 
     <!-- Footer -->
-    <footer class="footer footer-center p-4 bg-base-100 text-base-content mt-12">
-        <div>
-            <p>Presales Intel - AI-powered meeting preparation</p>
+    <footer class="footer">
+        <div class="container">
+            <span>Presales Intel</span>
+            <small>Meeting preparation clarity</small>
         </div>
     </footer>
 
     {% block scripts %}{% endblock %}
 </body>
-</html>
 
+</html>

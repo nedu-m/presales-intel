@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+import re
 from typing import Optional, Dict
 from openai import OpenAI
 from dotenv import load_dotenv
@@ -133,14 +133,65 @@ Format the output as clear, scannable markdown. Be specific and actionable. Focu
         }
     
     def _parse_sections(self, brief_text: str) -> Dict[str, str]:
-        """Parse the brief into sections (simple implementation)"""
-        # For MVP, just return the full text for each section
-        # In production, you'd use structured outputs or better parsing
-        return {
-            "company_context": brief_text,
-            "attendee_analysis": "",
-            "tech_stack": "",
-            "competitive_landscape": "",
-            "suggested_questions": ""
+        """Parse the markdown brief into its major sections."""
+        alias_map = {
+            "company context": "company_context",
+            "company overview": "company_context",
+            "attendee analysis": "attendee_analysis",
+            "attendees": "attendee_analysis",
+            "personas": "attendee_analysis",
+            "tech stack": "tech_stack",
+            "security posture": "tech_stack",
+            "technical landscape": "tech_stack",
+            "competitive landscape": "competitive_landscape",
+            "competition": "competitive_landscape",
+            "competitors": "competitive_landscape",
+            "suggested questions": "suggested_questions",
+            "talking points": "suggested_questions",
+            "discovery questions": "suggested_questions"
         }
+        section_keys = [
+            "company_context",
+            "attendee_analysis",
+            "tech_stack",
+            "competitive_landscape",
+            "suggested_questions"
+        ]
+        buffers = {key: [] for key in section_keys}
+        current_key = "company_context"
+        lines = brief_text.splitlines()
+
+        for raw_line in lines:
+            stripped = raw_line.strip()
+
+            if stripped.startswith("#"):
+                heading_text = stripped.lstrip("#").strip()
+                heading_text = re.sub(r"^[\d\.\)]*\s*", "", heading_text)
+                normalized = heading_text.lower().replace("&", "and")
+                normalized = normalized.split("(")[0].strip()
+
+                matched_key = None
+                for alias, target in alias_map.items():
+                    if alias in normalized:
+                        matched_key = target
+                        break
+
+                if matched_key:
+                    current_key = matched_key
+                    continue
+                elif current_key:
+                    buffers[current_key].append(raw_line)
+                    continue
+                else:
+                    continue
+
+            if current_key:
+                buffers[current_key].append(raw_line)
+            else:
+                buffers["company_context"].append(raw_line)
+
+        parsed = {key: "\n".join(value).strip() for key, value in buffers.items()}
+        if not parsed["company_context"]:
+            parsed["company_context"] = brief_text.strip()
+        return parsed
 
